@@ -50,10 +50,7 @@ export default function RootLayout({
       <body className={`antialiased w-full flex`}>
         <SidebarProvider>
           <AppSidebar />
-          <SidebarInset>
-            
-            {children}
-          </SidebarInset>
+          <SidebarInset>{children}</SidebarInset>
         </SidebarProvider>
       </body>
     </html>

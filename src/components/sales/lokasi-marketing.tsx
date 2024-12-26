@@ -1,6 +1,6 @@
 "use client";
+import dynamic from "next/dynamic";
 
-import MarketingLocation from "../maps/maps";
 import {
   Card,
   CardContent,
@@ -103,6 +103,21 @@ function ComboBoxMarketing() {
   );
 }
 
+const MyAwesomeMap = dynamic(() => import("../maps/maps"), { ssr: false });
+
+export function Inicio() {
+  const [mapLoaded, setMapLoaded] = React.useState(false);
+
+  React.useEffect(() => {
+    // Set mapLoaded to true only once after the component is mounted
+    if (!mapLoaded) {
+      setMapLoaded(true);
+    }
+  }, [mapLoaded]); // Empty dependency array to run only once
+
+  return <>{mapLoaded && <MyAwesomeMap />}</>;
+}
+
 export function LokasiMarketing() {
   return (
     <>
@@ -119,7 +134,7 @@ export function LokasiMarketing() {
         <CardContent>
           <div className="flex flex-col gap-4">
             <ComboBoxMarketing />
-            <MarketingLocation></MarketingLocation>
+            <Inicio />
           </div>
         </CardContent>
       </Card>

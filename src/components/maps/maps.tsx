@@ -1,7 +1,7 @@
 "use client";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import L from "leaflet";
-import "leaflet/dist/leaflet.css";
+import "leaflet/dist/leaflet.css"; // Ensure Leaflet CSS is loaded
 
 export default function MarketingLocation() {
   const staticLocation = { lat: -6.1751, lng: 106.865 };
@@ -24,8 +24,8 @@ export default function MarketingLocation() {
       <MapContainer
         center={staticLocation}
         zoom={13}
-        style={{ aspectRatio: "7/3", width: "100%", zIndex: 0 }}
-        attributionControl={false} 
+        style={{ width: "100%", aspectRatio: "7/3", zIndex: 0 }} // Ensure the height is set
+        attributionControl={false}
       >
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

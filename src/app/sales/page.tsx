@@ -1,3 +1,4 @@
+"use client";
 import { OmzetMarketing } from "@/components/sales/omzet-marketing";
 import { AppSidebar } from "@/components/app-sidebar";
 import { SalesTable } from "@/components/sales/akun-marketing";
@@ -68,7 +69,6 @@ export default function Page() {
           </div>
         </div>
         <div className="col-span-2 grid grid-cols-2 gap-4 h-min">
-          {/* Sales Account Table */}
           <div className="col-span-2 h-min">
             <SalesTable />
           </div>
