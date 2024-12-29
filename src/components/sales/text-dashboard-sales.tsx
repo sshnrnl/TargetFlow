@@ -6,12 +6,11 @@ const dashboardText = {
   },
   "omzet-penjualan": {
     title: "Omzet Penjualan",
-    description: "Laporan omzet penjualan dari Januari hingga Juni 2024.",
+    description: "Laporan omzet penjualan dari Januari hingga Juni.",
   },
   "total-pelanggan": {
     title: "Total Pelanggan",
-    description:
-      "Statistik total pelanggan untuk periode Januari hingga Juni 2024.",
+    description: "Statistik total pelanggan untuk periode Januari hingga Juni.",
   },
   "akun-marketing": {
     title: "Akun Marketing",
@@ -32,6 +31,10 @@ const dashboardText = {
   "preferensi-akun": {
     title: "Preferensi Akun",
     description: "Sesuaikan preferensi akun marketing sesuai kebutuhan.",
+  },
+  "kinerja-sales": {
+    title: "Kinerja Sales",
+    description: "Pantau kinerja sales Anda dengan mudah di sini.",
   },
 };
 

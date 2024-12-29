@@ -52,7 +52,7 @@ export function CalendarForm() {
           <PopoverTrigger asChild>
             <Button
               variant={"outline"}
-              className="w-[240px] pl-3 text-left font-normal"
+              className="w-full pl-3 text-left font-normal"
             >
               {startDate ? (
                 format(startDate, "PPP")
@@ -68,7 +68,9 @@ export function CalendarForm() {
               selected={startDate || undefined}
               onSelect={(date: Date | undefined) => setStartDate(date || null)} // Menyimpan tanggal mulai yang dipilih
               disabled={(date: Date | undefined) =>
-                date === undefined || date > new Date() || date < new Date("1900-01-01")
+                date === undefined ||
+                date > new Date() ||
+                date < new Date("1900-01-01")
               }
               initialFocus
             />
@@ -87,7 +89,7 @@ export function CalendarForm() {
           <PopoverTrigger asChild>
             <Button
               variant={"outline"}
-              className="w-[240px] pl-3 text-left font-normal"
+              className="w-full pl-3 text-left font-normal"
             >
               {endDate ? (
                 format(endDate, "PPP")
@@ -103,7 +105,9 @@ export function CalendarForm() {
               selected={endDate || undefined}
               onSelect={handleEndDateSelect} // Menggunakan handler khusus untuk pemilihan tanggal selesai
               disabled={(date: Date | undefined) =>
-                date === undefined || date > new Date() || date < new Date("1900-01-01")
+                date === undefined ||
+                date > new Date() ||
+                date < new Date("1900-01-01")
               }
               initialFocus
             />

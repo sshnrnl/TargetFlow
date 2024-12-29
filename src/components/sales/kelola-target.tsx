@@ -133,7 +133,7 @@ export function KelolaTarget() {
                               variant="outline"
                               role="combobox"
                               className={cn(
-                                "w-[200px] justify-between",
+                                "w-full justify-between",
                                 !field.value && "text-muted-foreground"
                               )}
                             >
@@ -144,7 +144,7 @@ export function KelolaTarget() {
                                 : "Select target"}
                               <ChevronsUpDown className="opacity-50" />
                             </Button>
-                            <Button type="submit">Kelola Kampanye</Button>
+                            {/* <Button type="submit">Kelola Kampanye</Button> */}
                           </div>
                         </FormControl>
                       </PopoverTrigger>
