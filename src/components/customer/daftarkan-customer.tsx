@@ -13,9 +13,8 @@ import { Label } from "@/components/ui/label";
 import dashboardText from "./text-dashboard-customer";
 import dynamic from "next/dynamic";
 
-// Dynamically import MapInput with no SSR (Server-Side Rendering)
 const MapInput = dynamic(() => import("../maps/maps-input"), {
-  ssr: false, // Disable SSR for this component
+  ssr: false,
 });
 
 export function DaftarkanCustomer({
@@ -35,14 +34,6 @@ export function DaftarkanCustomer({
     setLocation(location);
   };
 
-  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchQuery(event.target.value);
-  };
-
-  const handleSearch = () => {
-    console.log("Searching for:", searchQuery);
-  };
-
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
@@ -59,33 +50,44 @@ export function DaftarkanCustomer({
           <form>
             <div className="flex flex-col gap-6">
               <div className="grid gap-2">
-                <Label htmlFor="username">Email</Label>
+                <Label htmlFor="perusahaan">Nama Perusahaan</Label>
+                <Input
+                  id="perusahaan"
+                  type="text"
+                  placeholder="PT. MITRA KEMASAN UNGGULAN"
+                  required
+                />
+              </div>
+
+              <div className="grid gap-2">
                 <div className="grid grid-cols-2 gap-2">
+                  <Label htmlFor="nama">Nama</Label>
+                  <Label htmlFor="nomor">WhatsApp</Label>
+                  <Input id="nama" type="text" placeholder="Vinny" required />
                   <Input
-                    id="username"
-                    type="username"
-                    placeholder="example"
+                    id="nomor"
+                    type="text"
+                    placeholder="08123456789"
                     required
                   />
-                  <Input value={"@mitraku.com"} disabled />
                 </div>
-              </div>
-              <div className="grid gap-2">
-                <div className="flex items-center">
-                  <Label htmlFor="password">Password</Label>
-                </div>
-                <Input id="password" type="password" required />
               </div>
 
               {/* Address Form */}
-              <div className="grid gap-2">
-                <Label htmlFor="fullAddress">Alamat Lengkap</Label>
+              <div className="grid gap-2 grid-cols-2">
+                <Label htmlFor="provinsi">Provinsi</Label>
+                <Label htmlFor="kota">Kota</Label>
+
                 <Input
-                  id="fullAddress"
+                  id="provinsi"
                   type="text"
                   placeholder="Masukkan alamat lengkap"
-                  value={fullAddress}
-                  onChange={(e) => setFullAddress(e.target.value)}
+                  required
+                />
+                <Input
+                  id="kota"
+                  type="text"
+                  placeholder="Masukkan alamat lengkap"
                   required
                 />
               </div>

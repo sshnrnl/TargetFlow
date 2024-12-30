@@ -109,11 +109,10 @@ export function Inicio() {
   const [mapLoaded, setMapLoaded] = React.useState(false);
 
   React.useEffect(() => {
-    // Set mapLoaded to true only once after the component is mounted
     if (!mapLoaded) {
       setMapLoaded(true);
     }
-  }, [mapLoaded]); // Empty dependency array to run only once
+  }, [mapLoaded]); 
 
   return <>{mapLoaded && <MyAwesomeMap />}</>;
 }

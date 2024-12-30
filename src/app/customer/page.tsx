@@ -61,11 +61,11 @@ export default function Page() {
           <TotalCustomer />
           <TotalTransaksi />
         </div>
-        <div className="grid grid-cols-10 col-span-10">
-          <div className="col-span-5"></div>
-          <div className="col-span-5">
+        <div className="grid grid-cols-3 col-span-10 gap-4">
+          <div className="col-span-1">
             <DaftarkanCustomer />
           </div>
+          <div className="col-span-2"></div>
         </div>
       </div>
     </>
