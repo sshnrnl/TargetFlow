@@ -46,7 +46,7 @@ const MapInput: React.FC<MapInputProps> = ({
     <MapContainer
       center={defaultPosition}
       zoom={13}
-      style={{ height: "400px", width: "100%" }}
+      style={{ aspectRatio: "7/3", width: "100%" }}
     >
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

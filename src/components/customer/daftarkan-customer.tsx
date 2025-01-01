@@ -12,6 +12,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import dashboardText from "./text-dashboard-customer";
 import dynamic from "next/dynamic";
+import { Textarea } from "../ui/textarea";
 
 const MapInput = dynamic(() => import("../maps/maps-input"), {
   ssr: false,
@@ -74,38 +75,37 @@ export function DaftarkanCustomer({
               </div>
 
               {/* Address Form */}
-              <div className="grid gap-2 grid-cols-2">
+              <div className="grid gap-2">
                 <Label htmlFor="provinsi">Provinsi</Label>
-                <Label htmlFor="kota">Kota</Label>
-
                 <Input
                   id="provinsi"
                   type="text"
                   placeholder="Masukkan alamat lengkap"
                   required
                 />
+              </div>
+              <div className="grid gap-2 grid-cols-2">
+                <Label htmlFor="kota">Kota</Label>
+                <Label htmlFor="kecamatan">Kecamatan</Label>
+
                 <Input
                   id="kota"
                   type="text"
                   placeholder="Masukkan alamat lengkap"
                   required
                 />
-              </div>
-
-              <div className="grid gap-2">
-                <Label htmlFor="kecamatan">Kecamatan</Label>
                 <Input
                   id="kecamatan"
                   type="text"
-                  placeholder="Masukkan kecamatan"
-                  value={kecamatan}
-                  onChange={(e) => setKecamatan(e.target.value)}
+                  placeholder="Masukkan alamat lengkap"
                   required
                 />
               </div>
 
-              <div className="grid gap-2">
+              <div className="grid gap-2 grid-cols-2">
                 <Label htmlFor="kelurahan">Kelurahan</Label>
+                <Label htmlFor="kodePos">Kode Pos</Label>
+
                 <Input
                   id="kelurahan"
                   type="text"
@@ -114,10 +114,6 @@ export function DaftarkanCustomer({
                   onChange={(e) => setKelurahan(e.target.value)}
                   required
                 />
-              </div>
-
-              <div className="grid gap-2">
-                <Label htmlFor="kodePos">Kode Pos</Label>
                 <Input
                   id="kodePos"
                   type="text"
@@ -127,20 +123,29 @@ export function DaftarkanCustomer({
                   required
                 />
               </div>
-              <div>
+              <div className="grid gap-2">
+                <Label htmlFor="provinsi">Alamat Lengkap</Label>
+                <Textarea
+                  id="alamat"
+                  placeholder="Masukkan alamat lengkap"
+                  required
+                />
+              </div>
+
+              <div className="grid gap-2">
                 <Label>Pilih Lokasi</Label>
                 <MapInput onLocationChange={handleLocationChange} />
 
-                {location && (
+                {/* {location && (
                   <p className="text-sm md:text-md lg:text-lg mt-2">
                     Lokasi Terpilih: Latitude {location.lat}, Longitude{" "}
                     {location.lng}
                   </p>
-                )}
+                )} */}
               </div>
 
               <Button type="submit" className="w-full">
-                Buat Akun
+                Daftarkan Customer
               </Button>
             </div>
           </form>

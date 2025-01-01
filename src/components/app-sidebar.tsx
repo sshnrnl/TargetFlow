@@ -4,6 +4,7 @@ import * as React from "react";
 import {
   AudioWaveform,
   BookOpen,
+  BookUser,
   Bot,
   Command,
   Frame,
@@ -29,6 +30,7 @@ import {
   SidebarHeader,
   SidebarRail,
 } from "@/components/ui/sidebar";
+import { url } from "inspector";
 
 // This is sample data.
 const data = {
@@ -152,6 +154,7 @@ const data = {
       url: "/sales",
       icon: SquareUser,
     },
+    { name: "Customer", url: "/customer", icon: BookUser },
     {
       name: "Sales Order",
       url: "/sales-order",
