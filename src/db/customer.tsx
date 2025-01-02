@@ -23,6 +23,7 @@ export const CustomerTableData: Customer[] = [
     kelurahan: "Arjuna",
     kode_pos: "40172",
     alamat_lengkap: "Jalan Arjuna No. 10, Cicendo, Bandung",
+    value: "pt-alpha-jaya",
   },
   {
     perusahaan: "CV Maju Bersama",
@@ -34,6 +35,7 @@ export const CustomerTableData: Customer[] = [
     kelurahan: "Dukuh Pakis",
     kode_pos: "60262",
     alamat_lengkap: "Jalan Dukuh Pakis No. 5, Tegalsari, Surabaya",
+    value: "cv-maju-bersama",
   },
   {
     perusahaan: "UD Harapan Baru",
@@ -45,6 +47,7 @@ export const CustomerTableData: Customer[] = [
     kelurahan: "Cipete",
     kode_pos: "12170",
     alamat_lengkap: "Jalan Cipete Raya No. 23, Kebayoran Baru, Jakarta Selatan",
+    value: "ud-harapan-baru",
   },
   {
     perusahaan: "PT Karya Mandiri",
@@ -56,6 +59,7 @@ export const CustomerTableData: Customer[] = [
     kelurahan: "Petir",
     kode_pos: "15147",
     alamat_lengkap: "Jalan Raya Petir No. 18, Cipondoh, Tangerang",
+    value: "pt-karya-mandiri",
   },
   {
     perusahaan: "CV Sentosa Abadi",
@@ -67,6 +71,7 @@ export const CustomerTableData: Customer[] = [
     kelurahan: "Tegalsari",
     kode_pos: "50257",
     alamat_lengkap: "Jalan Tegalsari No. 15, Candisari, Semarang",
+    value: "cv-sentosa-abadi",
   },
   {
     perusahaan: "PT Nusantara Sejahtera",
@@ -78,6 +83,7 @@ export const CustomerTableData: Customer[] = [
     kelurahan: "Padang Bulan",
     kode_pos: "20153",
     alamat_lengkap: "Jalan Padang Bulan No. 12, Medan Baru, Medan",
+    value: "pt-nusantara-sejahtera",
   },
   {
     perusahaan: "PT Cahaya Indah",
@@ -89,6 +95,7 @@ export const CustomerTableData: Customer[] = [
     kelurahan: "Sepinggan",
     kode_pos: "76115",
     alamat_lengkap: "Jalan Sepinggan No. 8, Balikpapan Selatan, Balikpapan",
+    value: "pt-cahaya-indah",
   },
   {
     perusahaan: "CV Prima Utama",
@@ -100,6 +107,7 @@ export const CustomerTableData: Customer[] = [
     kelurahan: "Karampuang",
     kode_pos: "90231",
     alamat_lengkap: "Jalan Karampuang No. 19, Panakkukang, Makassar",
+    value: "cv-prima-utama",
   },
   {
     perusahaan: "UD Mega Jaya",
@@ -111,6 +119,7 @@ export const CustomerTableData: Customer[] = [
     kelurahan: "Harapan Jaya",
     kode_pos: "17143",
     alamat_lengkap: "Jalan Harapan Jaya No. 9, Bekasi Barat, Bekasi",
+    value: "ud-mega-jaya",
   },
   {
     perusahaan: "PT Surya Gemilang",
@@ -122,6 +131,7 @@ export const CustomerTableData: Customer[] = [
     kelurahan: "Sanur",
     kode_pos: "80228",
     alamat_lengkap: "Jalan Sanur No. 7, Denpasar Selatan, Denpasar",
+    value: "pt-surya-gemilang",
   },
   {
     perusahaan: "PT Anugerah Bersama",
@@ -133,6 +143,7 @@ export const CustomerTableData: Customer[] = [
     kelurahan: "Kauman",
     kode_pos: "65119",
     alamat_lengkap: "Jalan Kauman No. 16, Klojen, Malang",
+    value: "pt-anugerah-bersama",
   },
   {
     perusahaan: "CV Sumber Rejeki",
@@ -145,6 +156,7 @@ export const CustomerTableData: Customer[] = [
     kode_pos: "35118",
     alamat_lengkap:
       "Jalan Gedong Air No. 11, Tanjung Karang Barat, Bandar Lampung",
+    value: "cv-sumber-rejeki",
   },
   {
     perusahaan: "UD Pertiwi",
@@ -156,6 +168,7 @@ export const CustomerTableData: Customer[] = [
     kelurahan: "Talang Banjar",
     kode_pos: "36128",
     alamat_lengkap: "Jalan Talang Banjar No. 20, Jambi Timur, Jambi",
+    value: "ud-pertiwi",
   },
   {
     perusahaan: "PT Global Tekno",
@@ -167,6 +180,7 @@ export const CustomerTableData: Customer[] = [
     kelurahan: "Lamjamee",
     kode_pos: "23233",
     alamat_lengkap: "Jalan Lamjamee No. 14, Meuraxa, Banda Aceh",
+    value: "pt-global-tekno",
   },
   {
     perusahaan: "CV Indo Makmur",
@@ -178,6 +192,7 @@ export const CustomerTableData: Customer[] = [
     kelurahan: "Darit",
     kode_pos: "78116",
     alamat_lengkap: "Jalan Darit No. 25, Pontianak Kota, Pontianak",
+    value: "cv-indo-makmur",
   },
   {
     perusahaan: "UD Nusantara",
@@ -189,6 +204,7 @@ export const CustomerTableData: Customer[] = [
     kelurahan: "Tuah Madani",
     kode_pos: "28293",
     alamat_lengkap: "Jalan Tuah Madani No. 21, Tampan, Pekanbaru",
+    value: "ud-nusantara",
   },
   {
     perusahaan: "PT Alam Sejahtera",
@@ -200,6 +216,7 @@ export const CustomerTableData: Customer[] = [
     kelurahan: "Talang Kelapa",
     kode_pos: "30152",
     alamat_lengkap: "Jalan Talang Kelapa No. 19, Sukarami, Palembang",
+    value: "pt-alam-sejahtera",
   },
   {
     perusahaan: "CV Griya Bahagia",
@@ -211,6 +228,7 @@ export const CustomerTableData: Customer[] = [
     kelurahan: "Paal Dua",
     kode_pos: "95114",
     alamat_lengkap: "Jalan Paal Dua No. 7, Tikala, Manado",
+    value: "cv-griya-bahagia",
   },
   {
     perusahaan: "PT Sumber Jaya",
@@ -222,6 +240,7 @@ export const CustomerTableData: Customer[] = [
     kelurahan: "Karang Jangkong",
     kode_pos: "83115",
     alamat_lengkap: "Jalan Karang Jangkong No. 18, Cakranegara, Mataram",
+    value: "pt-sumber-jaya",
   },
   {
     perusahaan: "UD Berkah Utama",
@@ -233,6 +252,7 @@ export const CustomerTableData: Customer[] = [
     kelurahan: "Kalitanjung",
     kode_pos: "45143",
     alamat_lengkap: "Jalan Kalitanjung No. 12, Harjamukti, Cirebon",
+    value: "ud-berkah-utama",
   },
 ];
 
@@ -246,4 +266,5 @@ export type Customer = {
   kelurahan: string;
   kode_pos: string;
   alamat_lengkap: string;
+  value: string;
 };

@@ -3,10 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --hostname 0.0.0.0",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "local-1": "cross-env NEXT_PROJECT_DIR=.next3000 next dev -p 3000",
+    "local-2": "cross-env NEXT_PROJECT_DIR=.next3001 next dev -p 3001"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
@@ -29,6 +31,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.0.0",
+    "concurrently": "^9.1.2",
     "date-fns": "^3.6.0",
     "leaflet": "^1.9.0",
     "leaflet-control-geocoder": "^3.1.0",
