@@ -23,9 +23,14 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL("/sales", request.url));
   }
 
+  // Allow access to the root path
+  if (pathname === "/" && !token) {
+    return NextResponse.redirect(new URL("/login", request.url));
+  }
+
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ["/sales/:path*", "/admin/:path*"],
+  matcher: ["/", "/sales/:path*", "/admin/:path*"],
 };

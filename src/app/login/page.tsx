@@ -22,22 +22,22 @@ const Login: React.FC = () => {
     });
 
     if (res?.error) {
-      toast("Event has been created", {
-        description: "Sunday, December 03, 2023 at 9:00 AM",
+      toast("Invalid Account", {
+        description: "Try Again",
         action: {
           label: "Undo",
           onClick: () => console.log("Undo"),
         },
       });
     } else {
-      router.push("/check"); // Redirect on success
+      router.push("/admin"); // Redirect on success
     }
   };
 
   return (
     <>
-      <div className="h-[100vh] w-[100vw] grid grid-cols-2">
-        <div className="h-full w-full bg-foreground p-10 flex flex-col justify-between">
+      <div className="h-[100vh] w-[100vw] grid lg:grid-cols-2">
+        <div className="lg:flex hidden h-full w-full bg-foreground p-10  flex-col justify-between">
           <div className="flex items-center gap-2">
             <img
               src="/logo/logo-mks.png"
@@ -57,7 +57,7 @@ const Login: React.FC = () => {
             <p className="text-md text-background">~~ Shan</p>
           </div>
         </div>
-        <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px] ">
+        <div className="mx-auto flex w-full flex-col justify-center space-y-6 lg:px-0 px-6 sm:w-[350px] ">
           <div className="flex-col flex justify-center">
             <h2 className="text-2xl font-bold text-center">Login </h2>
             <p className="text-sm text-muted-foreground text-center">
@@ -120,14 +120,14 @@ const Login: React.FC = () => {
             By clicking continue, you agree to our{" "}
             <a
               className="underline underline-offset-4 hover:text-primary"
-              href="/terms"
+              href="/login"
             >
               Terms of Service
             </a>{" "}
             and{" "}
             <a
               className="underline underline-offset-4 hover:text-primary"
-              href="/privacy"
+              href="/login"
             >
               Privacy Policy
             </a>

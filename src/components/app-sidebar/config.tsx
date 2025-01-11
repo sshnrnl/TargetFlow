@@ -92,7 +92,8 @@ export const ConfigData = {
     { name: "Customer", url: "/customer", icon: BookUser },
     {
       name: "Sales Order",
-      url: "/sales-order",
+      // url: "/sales-order",
+      url: "/",
       icon: ScrollText,
     },
 
@@ -168,7 +169,8 @@ const ConfigSidebarData: ConfigSidebarDataType = {
       },
       {
         name: "Buat Sales Order",
-        url: "/sales/sales-order",
+        // url: "/sales/sales-order",
+        url: "/sales",
         icon: ScrollText,
       },
     ],
