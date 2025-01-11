@@ -36,6 +36,34 @@ const dashboardText = {
     title: "Kinerja Sales",
     description: "Pantau kinerja sales Anda dengan mudah di sini.",
   },
+  "total-omzet-sales": {
+    title: "Omzet Saya",
+    description: "Disini anda dapat melihat total omzet penjualan anda",
+  },
+  "performa-sales": {
+    title: "Performa Saya",
+    description: "Disini anda dapat melihat performa anda bulan ini.",
+  },
+  "invoice-sales": {
+    title: "Invoice Saya",
+    description: "Disini anda dapat melihat total invoice bulan ini.",
+  },
+  "customer-sales": {
+    title: "Customer Saya",
+    description: "Lihat jumlah customer anda bulan ini.",
+  },
+  "invoice-terbaru": {
+    title: "Invoice Terbaru",
+    description: "Lacak invoice terbaru anda disini.",
+  },
+  "barang-terjual": {
+    title: "Barang Terjual",
+    description: "Lihat semua barang yang sudah kamu jual disini.",
+  },
+  "buat-sales-order": {
+    title: "Buat Sales Order",
+    description: "Klik tombol disini untuk membuat sales order.",
+  },
 };
 
 export default dashboardText;

@@ -31,7 +31,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import items from "@/db/items";
+import {items} from "@/db/items";
 
 const FormSchema = z
   .object({

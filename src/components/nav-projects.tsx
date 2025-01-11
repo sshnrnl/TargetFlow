@@ -29,18 +29,17 @@ export function NavProjects({
   overview,
 }: {
   overview: {
-    name: string;
-    url: string;
-    icon: LucideIcon;
-  }[];
+    label: string;
+    item: { name: string; url: string; icon: LucideIcon }[];
+  };
 }) {
   const { isMobile } = useSidebar();
 
   return (
-    <SidebarGroup className="group-data-[collapsible=icon]:hidden">
-      <SidebarGroupLabel>Admin</SidebarGroupLabel>
+    <SidebarGroup>
+      <SidebarGroupLabel>{overview.label}</SidebarGroupLabel>
       <SidebarMenu>
-        {overview.map((item) => (
+        {overview.item?.map((item) => (
           <SidebarMenuItem key={item.name}>
             <SidebarMenuButton asChild>
               <a href={item.url}>
@@ -77,12 +76,12 @@ export function NavProjects({
             </DropdownMenu> */}
           </SidebarMenuItem>
         ))}
-        <SidebarMenuItem>
+        {/* <SidebarMenuItem>
           <SidebarMenuButton className="text-sidebar-foreground/70">
             <MoreHorizontal className="text-sidebar-foreground/70" />
             <span>More</span>
           </SidebarMenuButton>
-        </SidebarMenuItem>
+        </SidebarMenuItem> */}
       </SidebarMenu>
     </SidebarGroup>
   );

@@ -1,4 +1,4 @@
-const items = [
+export const items = [
   {
     name: "Notebook",
     price: 15000,
@@ -6,6 +6,7 @@ const items = [
     description: "A simple 80-page notebook for daily use.",
     label: "Notebook",
     value: "notebook",
+    imgs: "https://st.depositphotos.com/1875497/3781/i/450/depositphotos_37810929-stock-photo-books-on-white.jpg",
   },
   {
     name: "Ballpoint Pen",
@@ -14,6 +15,7 @@ const items = [
     description: "A smooth-writing ballpoint pen.",
     label: "Ballpoint Pen",
     value: "ballpoint-pen",
+    imgs: "https://faber-castell.co.id/cfind/source/images/product/fw/product-900x900/148152-2d1.jpg",
   },
   {
     name: "Pencil",
@@ -22,6 +24,7 @@ const items = [
     description: "A classic wooden pencil.",
     label: "Pencil",
     value: "pencil",
+    imgs: "https://www.marinmontagut.com/cdn/shop/products/Stylo_Yellow_ead02a6d-ac3f-47d9-bd15-d4637522b8e0.jpg?v=1706694053&width=1946",
   },
   {
     name: "Eraser",
@@ -30,6 +33,7 @@ const items = [
     description: "A durable rubber eraser.",
     label: "Eraser",
     value: "eraser",
+    imgs: "https://faber-castell.co.id/cfind/source/thumb/images/product/gwm/700x700-gwm/contain_w700_h700_187171.jpg.png",
   },
   {
     name: "Ruler",
@@ -38,6 +42,7 @@ const items = [
     description: "A 30 cm transparent ruler.",
     label: "Ruler",
     value: "ruler",
+    imgs: "https://df3k2q0k3bu2n.cloudfront.net/static/images/RULEPL8IN-2a_sq.jpg",
   },
   {
     name: "Marker",
@@ -46,6 +51,7 @@ const items = [
     description: "A black permanent marker.",
     label: "Marker",
     value: "marker",
+    imgs: "https://st2.depositphotos.com/1003272/5280/i/450/depositphotos_52809811-stock-photo-black-box.jpg",
   },
   {
     name: "Highlighter",
@@ -54,6 +60,7 @@ const items = [
     description: "A yellow fluorescent highlighter.",
     label: "Highlighter",
     value: "highlighter",
+    imgs: "https://st2.depositphotos.com/1003272/5280/i/450/depositphotos_52809811-stock-photo-black-box.jpg",
   },
   {
     name: "Glue Stick",
@@ -62,6 +69,7 @@ const items = [
     description: "A 15g glue stick.",
     label: "Glue Stick",
     value: "glue-stick",
+    imgs: "https://st2.depositphotos.com/1003272/5280/i/450/depositphotos_52809811-stock-photo-black-box.jpg",
   },
   {
     name: "Scissors",
@@ -70,6 +78,7 @@ const items = [
     description: "A pair of medium-sized scissors.",
     label: "Scissors",
     value: "scissors",
+    imgs: "https://st2.depositphotos.com/1003272/5280/i/450/depositphotos_52809811-stock-photo-black-box.jpg",
   },
   {
     name: "Stapler",
@@ -78,6 +87,7 @@ const items = [
     description: "A small stapler with 500 staples.",
     label: "Stapler",
     value: "stapler",
+    imgs: "https://st2.depositphotos.com/1003272/5280/i/450/depositphotos_52809811-stock-photo-black-box.jpg",
   },
   {
     name: "Paper Clips (50 pcs)",
@@ -86,6 +96,7 @@ const items = [
     description: "A pack of 50 colorful paper clips.",
     label: "Paper Clips (50 pcs)",
     value: "paper-clips",
+    imgs: "https://st2.depositphotos.com/1003272/5280/i/450/depositphotos_52809811-stock-photo-black-box.jpg",
   },
   {
     name: "Correction Tape",
@@ -94,6 +105,7 @@ const items = [
     description: "A compact correction tape.",
     label: "Correction Tape",
     value: "correction-tape",
+    imgs: "https://st2.depositphotos.com/1003272/5280/i/450/depositphotos_52809811-stock-photo-black-box.jpg",
   },
   {
     name: "Binder",
@@ -102,6 +114,7 @@ const items = [
     description: "A durable A4 binder.",
     label: "Binder",
     value: "binder",
+    imgs: "https://st2.depositphotos.com/1003272/5280/i/450/depositphotos_52809811-stock-photo-black-box.jpg",
   },
   {
     name: "Sticky Notes",
@@ -110,6 +123,7 @@ const items = [
     description: "A 100-sheet pad of sticky notes.",
     label: "Sticky Notes",
     value: "sticky-notes",
+    imgs: "https://st2.depositphotos.com/1003272/5280/i/450/depositphotos_52809811-stock-photo-black-box.jpg",
   },
   {
     name: "Sketchbook",
@@ -118,6 +132,7 @@ const items = [
     description: "A 50-page A4 sketchbook.",
     label: "Sketchbook",
     value: "sketchbook",
+    imgs: "https://st2.depositphotos.com/1003272/5280/i/450/depositphotos_52809811-stock-photo-black-box.jpg",
   },
   {
     name: "Drawing Pencil Set",
@@ -126,6 +141,7 @@ const items = [
     description: "A set of 12 drawing pencils.",
     label: "Drawing Pencil Set",
     value: "drawing-pencil-set",
+    imgs: "https://st2.depositphotos.com/1003272/5280/i/450/depositphotos_52809811-stock-photo-black-box.jpg",
   },
   {
     name: "Paint Brushes",
@@ -134,6 +150,7 @@ const items = [
     description: "A set of 5 paint brushes.",
     label: "Paint Brushes",
     value: "paint-brushes",
+    imgs: "https://st2.depositphotos.com/1003272/5280/i/450/depositphotos_52809811-stock-photo-black-box.jpg",
   },
   {
     name: "Watercolor Paints",
@@ -142,6 +159,7 @@ const items = [
     description: "A set of 12 watercolor paints.",
     label: "Watercolor Paints",
     value: "watercolor-paints",
+    imgs: "https://st2.depositphotos.com/1003272/5280/i/450/depositphotos_52809811-stock-photo-black-box.jpg",
   },
   {
     name: "Canvas Board",
@@ -150,6 +168,7 @@ const items = [
     description: "A 30x40 cm canvas board.",
     label: "Canvas Board",
     value: "canvas-board",
+    imgs: "https://st2.depositphotos.com/1003272/5280/i/450/depositphotos_52809811-stock-photo-black-box.jpg",
   },
   {
     name: "Oil Pastels",
@@ -158,7 +177,16 @@ const items = [
     description: "A set of 24 oil pastels.",
     label: "Oil Pastels",
     value: "oil-pastels",
+    imgs: "https://st2.depositphotos.com/1003272/5280/i/450/depositphotos_52809811-stock-photo-black-box.jpg",
   },
 ];
 
-export default items;
+export type Items = {
+  name: string;
+  price: number;
+  stock: number;
+  description: string;
+  label: string;
+  value: string;
+  imgs: string;
+};

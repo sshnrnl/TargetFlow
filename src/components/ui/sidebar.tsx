@@ -161,6 +161,8 @@ const Sidebar = React.forwardRef<
   React.ComponentProps<"div"> & {
     side?: "left" | "right";
     variant?: "sidebar" | "floating" | "inset";
+    vars: "sales" | "admin";
+
     collapsible?: "offcanvas" | "icon" | "none";
   }
 >(

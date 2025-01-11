@@ -1,6 +1,6 @@
 "use client";
 import { OmzetMarketing } from "@/components/sales/omzet-marketing";
-import { AppSidebar } from "@/components/app-sidebar";
+import { AppSidebar } from "@/components/app-sidebar/app-sidebar";
 import { SalesTable } from "@/components/sales/akun-marketing";
 import { ComponentCard } from "@/components/card/card";
 import { KinerjaSales } from "@/components/sales/kinerja-sales";

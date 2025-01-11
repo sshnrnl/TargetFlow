@@ -14,6 +14,14 @@ const dashboardText = {
     description:
       "Lihat rekomendasi produk yang mungkin cocok dengan pelanggan Anda.",
   },
+  "pricelist-produk": {
+    title: "Pricelist Produk",
+    description: "Lihat produk beserta deskripsi dan harganya disini.",
+  },
+  "list-so": {
+    title: "Item Sales Order",
+    description: "Review isi sales order kamu disini.",
+  },
 };
 
 export default dashboardText;
