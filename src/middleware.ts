@@ -24,8 +24,8 @@ export async function middleware(request: NextRequest) {
   }
 
   // Allow access to the root path
-  if (pathname === "/" && !token) {
-    return NextResponse.redirect(new URL("/login", request.url));
+  if (pathname === "/") {
+    return NextResponse.redirect(new URL("/sales", request.url));
   }
 
   return NextResponse.next();
