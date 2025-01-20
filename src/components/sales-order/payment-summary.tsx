@@ -138,7 +138,7 @@ export function PaymentSummary() {
         <Button
           onClick={() => {
             handleSubmitForm();
-            router.push("/sales/sales-order");
+            router.push("/sales");
           }}
           variant={"default"}
           className="w-full mt-6 font-bold"
