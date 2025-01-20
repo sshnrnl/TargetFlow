@@ -14,9 +14,10 @@ import { Button } from "../ui/button";
 import { useEffect, useState } from "react";
 import { postWithAuth } from "@/lib/post_api";
 import { useRouter } from "next/navigation";
-const router = useRouter();
 
 export function PaymentSummary() {
+  const router = useRouter();
+
   const [subtotal, setSubtotal] = useState<number>(0);
   const [submitFormData, setSubmitFormData] = useState<SubmitFormType>({
     customer_id: "",
