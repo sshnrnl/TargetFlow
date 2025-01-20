@@ -14,7 +14,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { ArrowUpDown, ChevronDown, MoreHorizontal } from "lucide-react";
-import { items, Items } from "@/db/items";
+import { fetchItems, FetchItemsType } from "@/db/items";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
@@ -36,18 +36,47 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-const data: Items[] = items;
-function handleAddToCart(id: string) {
-  const event = new CustomEvent("add-to-cart", { detail: id });
+//convert fetched items into map
+type CartType = {
+  id: string;
+  name: string;
+  qty: number;
+  price: number;
+  img: string;
+  total: number;
+  description: string;
+};
+function handleAddToCart(
+  id: string,
+  price: number,
+  description: string,
+  img: string,
+  name: string
+) {
+  const res: CartType = {
+    id: id,
+    name: name,
+    qty: 1,
+    price: price,
+    img: img,
+    total: price,
+    description: description,
+  };
+
+  // console.log(res);
+
+  // const existingItem = items.find((a) => a.id === id);
+  const event = new CustomEvent("add-to-cart", { detail: res });
   window.dispatchEvent(event);
 }
-export const columns: ColumnDef<Items>[] = [
+
+export const columns: ColumnDef<FetchItemsType>[] = [
   {
     accessorKey: "imgs",
     header: "Image",
     cell: ({ row }) => (
       <div
-        className="w-[6rem] rounded-md  aspect-square bg-contain bg-center bg-no-repeat"
+        className="w-[5rem] rounded-md  aspect-square bg-contain bg-center bg-no-repeat"
         style={{ backgroundImage: `url('${row.getValue("imgs")}')` }}
       ></div>
     ),
@@ -58,7 +87,7 @@ export const columns: ColumnDef<Items>[] = [
     header: "Barang",
     cell: ({ row }) => (
       <label
-        className="overflow-hidden text-ellipsis text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+        className="overflow-hidden text-ellipsis text-sm font-medium leading-none"
         style={{
           display: "-webkit-box",
           WebkitBoxOrient: "vertical",
@@ -74,7 +103,7 @@ export const columns: ColumnDef<Items>[] = [
     accessorKey: "price",
     header: "Harga",
     cell: ({ row }) => (
-      <label className=" text-sm font-bold leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+      <label className="text-sm font-bold">
         {new Intl.NumberFormat("id-ID", {
           style: "currency",
           currency: "IDR",
@@ -103,20 +132,28 @@ export const columns: ColumnDef<Items>[] = [
   {
     accessorKey: "value",
     header: "Value",
-    cell: ({ row }) => {
-      return (
-        <Button
-          onClick={() => handleAddToCart(row.getValue("value"))}
-          variant="outline"
-        >
-          Tambahkan
-        </Button>
-      );
-    },
+    cell: ({ row }) => (
+      <Button
+        onClick={() =>
+          handleAddToCart(
+            row.getValue("value"),
+            row.getValue("price"),
+            row.getValue("description"),
+            "https://st2.depositphotos.com/1003272/5280/i/450/depositphotos_52809811-stock-photo-black-box.jpg",
+            row.getValue("name")
+          )
+        }
+        variant="outline"
+      >
+        Tambahkan
+      </Button>
+    ),
   },
 ];
 
 export function PricelistTable() {
+  const [items, setItems] = React.useState<FetchItemsType[]>([]);
+
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
@@ -129,8 +166,21 @@ export function PricelistTable() {
   const [rowSelection, setRowSelection] = React.useState({});
   const [pageIndex, setPageIndex] = React.useState(0);
 
+  React.useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await fetchItems(); // Assuming fetchItems returns the data
+        setItems(data); // Set the fetched items to state
+      } catch (error) {
+        console.error("Error fetching items:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   const table = useReactTable({
-    data,
+    data: items,
     columns,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
@@ -270,14 +320,14 @@ export function PricelistTable() {
                 </div>
               ))
             ) : (
-              <TableRow>
-                <TableCell
-                  colSpan={columns.length}
-                  className="h-24 text-center"
-                >
-                  No results.
-                </TableCell>
-              </TableRow>
+              // <TableRow>
+              //   <TableCell
+              //     colSpan={columns.length}
+              //     className="h-24 text-center"
+              //   >
+              <div>No results.</div>
+              /* </TableCell>
+              </TableRow> */
             )}
           </div>
         </div>

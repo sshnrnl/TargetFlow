@@ -11,6 +11,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { MoreHorizontal } from "lucide-react";
+import { fetchWithAuth } from "@/lib/get_api";
+import { postWithAuth } from "@/lib/post_api";
 
 export const CustomerTableData: Customer[] = [
   {
@@ -196,7 +198,7 @@ export const CustomerTableData: Customer[] = [
   },
   {
     perusahaan: "UD Nusantara",
-    nama: "Rahmat Hidayat",
+    nama: "Rahmat Hidayat", 
     whatsapp: "081322334455",
     provinsi: "Riau",
     kota: "Pekanbaru",
@@ -267,4 +269,81 @@ export type Customer = {
   kode_pos: string;
   alamat_lengkap: string;
   value: string;
+};
+
+export type CustomerList = {
+  perusahaan: string;
+  value: string;
+};
+
+export type FetchCustomerDetailsResponse = {
+  message: string;
+  result: string[]; // Adjusted to match the flat array structure
+  status: number; // Represents HTTP status codes like 200, 401, etc.
+};
+
+export type CustomerDetails = {
+  value: string;
+  nama: string;
+  perusahaan: string;
+  alamat_lengkap: string;
+  whatsapp: string;
+};
+
+export const fetchCustomer = async (): Promise<CustomerList[]> => {
+  try {
+    const rawData = (
+      await fetchWithAuth<{ result: any[][] }>("/api/v1/sales/customer-list")
+    ).result;
+
+    // Transform the raw data into the desired structure
+    const customerList: CustomerList[] = rawData.map(([id, perusahaan]) => ({
+      perusahaan: perusahaan.trim(), // Trim to ensure clean data
+      value: id.trim(), // Remove extra whitespace
+    }));
+
+    console.log("Transformed customer list:", customerList);
+    return customerList;
+  } catch (error) {
+    console.error("Error fetching or transforming customer data:", error);
+    throw new Error("Failed to fetch customer list. Please try again later.");
+  }
+};
+
+export const fetchCustomerDetails = async (
+  customerId: string
+): Promise<CustomerDetails> => {
+  try {
+    // Make a POST request to fetch customer details
+    const response = await postWithAuth<FetchCustomerDetailsResponse>(
+      "/api/v1/sales/customer-details",
+      {
+        customer_id: customerId, // Use the parameter here
+      }
+    );
+
+    // Check for successful status code (200)
+    if (response.status !== 200) {
+      throw new Error(
+        `API error: ${response.message} (status: ${response.status})`
+      );
+    }
+
+    // Map the response.result to the desired CustomerDetails structure
+    const [id, name, companyName, address, phone] = response.result;
+
+    const customerDetails: CustomerDetails = {
+      value: id,
+      nama: name,
+      perusahaan: companyName,
+      alamat_lengkap: address,
+      whatsapp: phone,
+    };
+
+    console.log("Transformed data:", customerDetails);
+    return customerDetails;
+  } catch (error) {
+    console.error("Error fetching or transforming data:", error);
+    throw error; // Re-throw the error for the caller to handle
+  }
 };

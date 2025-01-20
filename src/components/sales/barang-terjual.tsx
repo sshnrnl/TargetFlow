@@ -1,6 +1,7 @@
 "use client";
 
 import { RecentSoldItemsTable } from "./barang-terjual-table";
+// import { fetchData } from "@/db/invoices";
 import {
   Card,
   CardContent,
@@ -10,7 +11,11 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import dashboardText from "./text-dashboard-sales";
+import { useEffect } from "react";
 export function RecentSoldItems() {
+  // useEffect(() => {
+  //   fetchData();
+  // }, []);
   return (
     <Card>
       <CardHeader>

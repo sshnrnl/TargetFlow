@@ -16,6 +16,7 @@ import {
 import dashboardText from "@/components/sales-order/text-dashboard-sales-order";
 import { Pricelist } from "@/components/sales-order/pricelist";
 import { ItemSO } from "@/components/sales-order/item-so";
+import { PaymentSummary } from "@/components/sales-order/payment-summary";
 
 export default function SalesOrder() {
   return (
@@ -55,6 +56,9 @@ export default function SalesOrder() {
         </div>
         <div className="col-span-1 flex flex-col">
           <ItemSO />
+        </div>
+        <div className="col-span-1 flex flex-col">
+          <PaymentSummary />
         </div>
       </div>
     </>

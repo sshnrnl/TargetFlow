@@ -22,6 +22,10 @@ const dashboardText = {
     title: "Item Sales Order",
     description: "Review isi sales order kamu disini.",
   },
+  "payment-summary": {
+    title: "Payment Summary",
+    description: "Lihat rangkuman pembayaran disini",
+  },
 };
 
 export default dashboardText;

@@ -39,23 +39,26 @@ import {
 } from "@/components/ui/card";
 
 import dashboardText from "./text-dashboard-sales-order";
-import { CustomerTableData, Customer } from "@/db/customer";
+import {
+  CustomerTableData,
+  Customer,
+  fetchCustomer,
+  CustomerList,
+  fetchCustomerDetails,
+  CustomerDetails,
+} from "@/db/customer";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 export function DetailOrder() {
-  const defaultCustomer: Customer = {
+  const defaultCustomer: CustomerDetails = {
     perusahaan: "Default Perusahaan",
     nama: "Default Nama",
     whatsapp: "0000000000",
-    provinsi: "Default Provinsi",
-    kota: "Default Kota",
-    kecamatan: "Default Kecamatan",
-    kelurahan: "Default Kelurahan",
-    kode_pos: "00000",
     alamat_lengkap: "Default Alamat Lengkap",
     value: "default-value",
   };
-  const [customerData, setCustomer] = useState<Customer>(defaultCustomer);
+  const [customerData, setCustomer] =
+    useState<CustomerDetails>(defaultCustomer);
 
   const formSchema = z.object({
     target: z.string().min(1, "Please select a target."),
@@ -66,25 +69,61 @@ export function DetailOrder() {
     defaultValues: { target: "" },
   });
 
+  const [customerListData, setCustomerList] = useState<CustomerList[]>([]);
+
+  useEffect(() => {
+    const fetchDataAsync = async () => {
+      const result = await fetchCustomer();
+      setCustomerList(result);
+    };
+    fetchDataAsync();
+  }, []);
+
   useEffect(() => {
     if (customerData) {
       console.log("Customer data (updated):", customerData);
     }
+
+    const event = new CustomEvent("add-customer", {
+      detail: customerData.value,
+    });
+    window.dispatchEvent(event);
   }, [customerData]);
 
-  const onChange = (value: string) => {
-    const selectedCustomer = CustomerTableData.find(
-      (customer) => customer.value === value
-    );
-
-    if (selectedCustomer) {
-      setCustomer(selectedCustomer); // Update state
+  const [customerCache, setCustomerCache] = useState(new Map());
+  //Debug customer details
+  useEffect(() => {
+    if (customerCache.get(form.getValues("target"))) {
+      setCustomer(customerCache.get(form.getValues("target")));
     }
+  }, [customerCache]);
+  ////////////////////////////
+  const onChange = async (value: string) => {
+    form.setValue("target", value);
+    try {
+      if (customerCache.has(value)) {
+        // Use cached data if available
+        setCustomer(customerCache.get(value));
+        console.log("cached data", customerCache.get(value));
+      } else {
+        // Fetch customer details if not cached
+        const fetchedCustomer = await fetchCustomerDetails(value);
+        // console.log(fetchedCustomer);
+        if (fetchedCustomer) {
+          // setCustomer(fetchedCustomer);
+          setCustomerCache((prev) => new Map(prev).set(value, fetchedCustomer)); // Add to cache
+        } else {
+          console.warn(`No customer found for value: ${value}`);
+        }
+      }
 
-    form.setValue("target", value); // Update form field
+      // Update the form with the selected value
+    } catch (error) {
+      console.error("Error in onChange function:", error);
+    }
   };
 
-  const selectedCustomer = CustomerTableData.find(
+  const selectedCustomer = customerListData.find(
     (customer) => customer.value === form.watch("target")
   );
 
@@ -114,9 +153,8 @@ export function DetailOrder() {
                           <div className="flex gap-2">
                             <Button
                               variant="outline"
-                              role="combobox"
                               className={cn(
-                                "w-full justify-between",
+                                "w-full justify-between ",
                                 !field.value && "text-muted-foreground"
                               )}
                             >
@@ -128,16 +166,20 @@ export function DetailOrder() {
                           </div>
                         </FormControl>
                       </PopoverTrigger>
-                      <PopoverContent align="start" className="w-[200px] p-0">
+                      <PopoverContent
+                        onOpenAutoFocus={(e) => e.preventDefault()}
+                        align="start"
+                        className="w-[200px] p-0"
+                      >
                         <Command>
                           <CommandInput
                             placeholder="Search target..."
-                            className="h-9"
+                            className="h-9 "
                           />
                           <CommandList>
                             <CommandEmpty>No target found.</CommandEmpty>
                             <CommandGroup>
-                              {CustomerTableData.map((customer) => (
+                              {customerListData.map((customer) => (
                                 <CommandItem
                                   value={customer.value}
                                   key={customer.value}

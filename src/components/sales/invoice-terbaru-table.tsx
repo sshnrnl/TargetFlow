@@ -15,7 +15,7 @@ import {
 } from "@tanstack/react-table";
 import { ArrowUpDown, ChevronDown, MoreHorizontal } from "lucide-react";
 import { CustomerTableData, Customer } from "@/db/customer";
-import { InvoicesTableData, Invoices } from "@/db/invoices";
+import { InvoicesTableData, Invoices, fetchData } from "@/db/invoices";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
@@ -36,8 +36,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-
-const data: Invoices[] = InvoicesTableData;
 
 export const columns: ColumnDef<Invoices>[] = [
   {
@@ -118,6 +116,15 @@ export const columns: ColumnDef<Invoices>[] = [
 ];
 
 export function RecentInvoiceTable() {
+  const [data, setData] = React.useState<Invoices[]>([]);
+
+  React.useEffect(() => {
+    const fetchDataAsync = async () => {
+      const result = await fetchData();
+      setData(result);
+    };
+    fetchDataAsync();
+  }, []);
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []

@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/card";
 import dashboardText from "./text-dashboard-sales-order";
 import { PricelistTable } from "./PricelistTable/pricelist-table";
-import ProductTable from "./ProdukSO/product-table";
+import { ProductTable } from "./ProdukSO/product-table";
 export function ItemSO() {
   return (
     <Card>

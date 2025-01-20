@@ -1,3 +1,5 @@
+import { fetchWithAuth } from "@/lib/get_api";
+
 export type Invoices = {
   id: string;
   sales: string;
@@ -7,6 +9,31 @@ export type Invoices = {
   tanggal: Date;
 };
 
+export const fetchData = async (): Promise<Invoices[]> => {
+  try {
+    const rawData = await fetchWithAuth<any[][]>(
+      "/api/v1/sales/get_so"
+    );
+
+    // Map the raw d  ata to the desired Invoices structure
+    const invoices: Invoices[] = rawData.map(
+      ([id, perusahaan, nominal, tanggal, , sales, nama]) => ({
+        id: id.trim(), // Remove extra whitespace
+        sales,
+        perusahaan,
+        nominal,
+        nama,
+        tanggal: new Date(tanggal), // Convert string to Date
+      })
+    );
+
+    console.log("Transformed data:", invoices);
+    return invoices;
+  } catch (error) {
+    console.error("Error fetching or transforming data:", error);
+    throw error; // Re-throw the error for the caller to handle
+  }
+};
 
 export const InvoicesTableData: Invoices[] = [
   {

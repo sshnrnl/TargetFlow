@@ -1,3 +1,5 @@
+import { fetchWithAuth } from "@/lib/get_api";
+
 export const items = [
   {
     name: "Notebook",
@@ -189,4 +191,36 @@ export type Items = {
   label: string;
   value: string;
   imgs: string;
+};
+
+export type FetchItemsType = {
+  value: string;
+  name: string;
+  price: number;
+  description: string;
+};
+
+export const fetchItems = async (): Promise<FetchItemsType[]> => {
+  try {
+    const rawData = (
+      await fetchWithAuth<{ result: any[][] }>("/api/v1/sales/items-list")
+    ).result;
+
+    // Transform the raw data into the desired structure
+    const itemsList: FetchItemsType[] = rawData.map(
+      ([value, name, price, description]) => ({
+        value, // Trim to ensure clean data
+        name,
+        price,
+        description: "SATUAN : " + description,
+        imgs: "https://st2.depositphotos.com/1003272/5280/i/450/depositphotos_52809811-stock-photo-black-box.jpg", // Remove extra whitespace
+      })
+    );
+
+    console.log("Transformed item list:", itemsList);
+    return itemsList;
+  } catch (error) {
+    console.error("Error fetching or transforming customer data:", error);
+    throw new Error("Failed to fetch customer list. Please try again later.");
+  }
 };

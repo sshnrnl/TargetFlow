@@ -1,65 +1,89 @@
 import React, { useState, useEffect } from "react";
 import { Items, items } from "@/db/items";
+import { InputCounter } from "@/components/ui/input-counter";
+import { X, Banknote } from "lucide-react";
 type CartType = {
   id: string;
   name: string;
   qty: number;
   price: number;
+  img: string;
+  total: number;
+  description: string;
 };
 
 export function ProductTable() {
   const [cart, setCart] = useState<CartType[]>([]);
 
-  // Convert products into a map for O(1) lookup
-  const productsArray = items;
   const productsMap = new Map(items.map((product) => [product.value, product]));
 
+  //////////////////
+  //CART DEBUGGER//
+  /////////////////
+  useEffect(() => {
+    const items = cart.reduce((acc, item) => {
+      acc[item.id] = item.qty; // Add each item to the accumulator
+      return acc;
+    }, {} as Record<string, number>);
+
+    const event = new CustomEvent("add-items", { detail: items });
+    window.dispatchEvent(event);
+
+    const subtotal = new CustomEvent("update-subtotal", {
+      detail: cart.reduce((total, item) => total + item.price * item.qty, 0),
+    });
+    window.dispatchEvent(subtotal);
+  }, [cart]);
+  //////////////////
+
+  ////////////////////////
+  // FUNCTION CONNECT TO SUBMIT FORM
+  ///////////////////////////
+
+  //////////////////////
   useEffect(() => {
     const handleAddToCart = (event: Event) => {
-      const Event = event as CustomEvent<string>;
-      const productId = Event.detail;
-      addToCartById(productId);
+      const customEvent = event as CustomEvent<CartType>;
+      addToCartById(customEvent.detail);
+      // console.log(customEvent.detail);
     };
 
     const handleRemoveFromCart = (event: Event) => {
-      console.log("Remove-from-cart event triggered");
-      const Event = event as CustomEvent<string>;
-      const productId = Event.detail;
-      console.log("Product ID:", productId);
-      removeFromCart(productId);
+      const customEvent = event as CustomEvent<string>;
+      removeFromCart(customEvent.detail);
     };
 
     window.addEventListener("add-to-cart", handleAddToCart);
     window.addEventListener("remove-from-cart", handleRemoveFromCart);
 
-    console.log("Event listeners added");
-
     return () => {
-      console.log("Cleaning up event listeners");
       window.removeEventListener("add-to-cart", handleAddToCart);
       window.removeEventListener("remove-from-cart", handleRemoveFromCart);
     };
   }, []);
 
-  const addToCartById = (productId: string) => {
-    const product = productsMap.get(productId);
-    if (!product) return; // If product doesn't exist, exit the function
+  const addToCartById = (product: CartType) => {
+    if (!product) return;
 
     setCart((prevCart) => {
-      const existingProduct = prevCart.some((item) => item.id === productId);
-      if (existingProduct) {
-        return prevCart;
-      } else {
-        return [
-          ...prevCart,
-          {
-            id: product.value,
-            name: product.name,
-            price: product.price,
-            qty: 1,
-          },
-        ];
+      const existingItem = prevCart.find((item) => item.id === product.id);
+      if (existingItem) {
+        return prevCart.map((item) =>
+          item.id === product.id ? { ...item, qty: item.qty } : item
+        );
       }
+      return [
+        ...prevCart,
+        {
+          id: product.id,
+          name: product.name,
+          price: product.price,
+          qty: 1,
+          total: product.price,
+          img: product.img,
+          description: product.description,
+        },
+      ];
     });
   };
 
@@ -67,34 +91,98 @@ export function ProductTable() {
     setCart((prevCart) => prevCart.filter((item) => item.id !== productId));
   };
 
-  return (
-    <>
-      <h1>Products</h1>
+  const updateQuantity = (productId: string, qty: number) => {
+    setCart((prevCart) =>
+      prevCart.map((item) =>
+        item.id === productId ? { ...item, qty, total: qty * item.price } : item
+      )
+    );
+  };
 
-      <h1>Cart</h1>
+  return (
+    <div>
       {cart.length === 0 ? (
         <p>Your cart is empty</p>
       ) : (
-        <ul>
+        <ul className="flex flex-col gap-[1px] bg-border px-[1px] py-[1px] rounded-lg">
           {cart.map((item) => (
-            <li key={item.id}>
-              {item.name} - ${item.price} x {item.qty}
-              <button onClick={() => removeFromCart(item.id)}>Remove</button>
+            <li key={item.id} className="flex  flex-col bg-white rounded-lg">
+              <div className="flex  p-2 ">
+                <img
+                  className="w-[5rem] aspect-square rounded-md"
+                  src={item.img}
+                  alt={item.name}
+                />
+                <div className="flex flex-col justify-between flex-1 p-2">
+                  <div className="flex items-start justify-between">
+                    <div className="flex flex-col">
+                      <label
+                        className="text-sm font-medium leading-none"
+                        style={{
+                          display: "-webkit-box",
+                          WebkitBoxOrient: "vertical",
+                          WebkitLineClamp: 2,
+                        }}
+                      >
+                        {item.name}
+                      </label>
+                      <label
+                        className="text-[0.8rem] text-muted-foreground"
+                        style={{
+                          display: "-webkit-box",
+                          WebkitBoxOrient: "vertical",
+                          WebkitLineClamp: 2,
+                        }}
+                      >
+                        {item.description}
+                      </label>
+                    </div>
+                    <button onClick={() => removeFromCart(item.id)}>
+                      <X className=" w-4 h-4 text-red-600" />
+                    </button>
+                  </div>
+
+                  <div className="flex justify-between items-end">
+                    <div className="flex flex-col">
+                      <label className="text-sm font-bold text-muted-foreground leading-none">
+                        {new Intl.NumberFormat("id-ID", {
+                          style: "currency",
+                          currency: "IDR",
+                          minimumFractionDigits: 0,
+                        }).format(item.price)}
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="border-t px-2 py-2 flex justify-between items-center">
+                <label className="text-md font-bold flex gap-2 items-center">
+                  <Banknote />
+                  {new Intl.NumberFormat("id-ID", {
+                    style: "currency",
+                    currency: "IDR",
+                    minimumFractionDigits: 0,
+                  }).format(item.total)}
+                </label>
+                <InputCounter
+                  value={item.qty}
+                  onChange={(qty) => updateQuantity(item.id, qty)}
+                />
+              </div>
             </li>
           ))}
         </ul>
       )}
-      <h2>
-        Total: ${cart.reduce((total, item) => total + item.price * item.qty, 0)}
-      </h2>
-    </>
-  );
-}
-
-export default function App() {
-  return (
-    <div>
-      <ProductTable />
+      {/* <h2>
+        Total:{" "}
+        {new Intl.NumberFormat("id-ID", {
+          style: "currency",
+          currency: "IDR",
+          minimumFractionDigits: 0,
+        }).format(
+          cart.reduce((total, item) => total + item.price * item.qty, 0)
+        )}
+      </h2> */}
     </div>
   );
 }
