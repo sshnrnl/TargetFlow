@@ -13,6 +13,8 @@ import { ProductTable } from "./ProdukSO/product-table";
 import { Button } from "../ui/button";
 import { useEffect, useState } from "react";
 import { postWithAuth } from "@/lib/post_api";
+import { useRouter } from "next/navigation";
+const router = useRouter();
 
 export function PaymentSummary() {
   const [subtotal, setSubtotal] = useState<number>(0);
@@ -133,7 +135,10 @@ export function PaymentSummary() {
           </div>
         </div>
         <Button
-          onClick={() => handleSubmitForm()}
+          onClick={() => {
+            handleSubmitForm();
+            router.push("/sales/sales");
+          }}
           variant={"default"}
           className="w-full mt-6 font-bold"
         >
