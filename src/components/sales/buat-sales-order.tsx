@@ -9,8 +9,10 @@ import dashboardText from "./text-dashboard-sales";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 
 export function BuatSalesOrder() {
+  const router = useRouter();
   return (
     <>
       <Card>
@@ -24,13 +26,14 @@ export function BuatSalesOrder() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form>
-            <div className="flex flex-col gap-6">
-              <Button type="submit" className="w-full">
-                Buat Sales Order
-              </Button>
-            </div>
-          </form>
+          <div className="flex flex-col gap-6">
+            <Button
+              onClick={() => router.push("/sales/sales-order")}
+              className="w-full"
+            >
+              Buat Sales Order
+            </Button>
+          </div>
         </CardContent>
       </Card>
     </>

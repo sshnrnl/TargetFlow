@@ -28,7 +28,7 @@ export const fetchWithAuth = async <T>(
 
     // Make API call
     const response = await axios.get<T>(
-      "https://b689qkm0-3333.asse.devtunnels.ms" + url,
+      process.env.NEXT_PUBLIC_BACKEND_ADDRESS + url,
       {
         ...config,
         headers, // Merge headers

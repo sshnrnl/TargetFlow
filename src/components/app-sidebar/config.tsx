@@ -170,7 +170,7 @@ const ConfigSidebarData: ConfigSidebarDataType = {
       {
         name: "Buat Sales Order",
         // url: "/sales/sales-order",
-        url: "/sales",
+        url: "/sales/sales-order",
         icon: ScrollText,
       },
     ],
