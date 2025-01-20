@@ -20,7 +20,7 @@ import {
 export const ConfigData = {
   user: {
     name: "Admin",
-    email: "admin-1@mitraku.com",
+    email: "admin-1@supplierplastik.com",
     avatar: "/avatars/shadcn.jpg",
   },
   teams: [

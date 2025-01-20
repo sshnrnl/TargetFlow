@@ -39,7 +39,7 @@ export function LoginForm({
                     placeholder="example"
                     required
                   />
-                  <Input value={"@mitraku.com"} disabled />
+                  <Input value={"@supplierplastik.com"} disabled />
                 </div>
               </div>
               <div className="grid gap-2">

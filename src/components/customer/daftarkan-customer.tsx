@@ -55,7 +55,7 @@ export function DaftarkanCustomer({
                 <Input
                   id="perusahaan"
                   type="text"
-                  placeholder="PT. MITRA KEMASAN UNGGULAN"
+                  placeholder="PT. MKS"
                   required
                 />
               </div>

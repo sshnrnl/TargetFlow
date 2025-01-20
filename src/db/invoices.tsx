@@ -11,9 +11,7 @@ export type Invoices = {
 
 export const fetchData = async (): Promise<Invoices[]> => {
   try {
-    const rawData = await fetchWithAuth<any[][]>(
-      "/api/v1/sales/get_so"
-    );
+    const rawData = await fetchWithAuth<any[][]>("/api/v1/sales/get_so");
 
     // Map the raw d  ata to the desired Invoices structure
     const invoices: Invoices[] = rawData.map(
@@ -151,7 +149,7 @@ export const InvoicesTableData: Invoices[] = [
   {
     id: "INV015",
     sales: "Alexander Hill",
-    perusahaan: "PT Mitra Sejati",
+    perusahaan: "PT MKS",
     nominal: 8000000,
     nama: "Olivia",
     tanggal: new Date("2025-01-15"),

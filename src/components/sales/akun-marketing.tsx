@@ -49,31 +49,31 @@ const data: Payment[] = [
     id: "sales-1",
     amount: 250000000,
     status: "aktif",
-    email: "sales-1@mitraku.com",
+    email: "sales-1@supplierplastik.com",
   },
   {
     id: "sales-2",
     amount: 220000000,
     status: "aktif",
-    email: "sales-2@mitraku.com",
+    email: "sales-2@supplierplastik.com",
   },
   {
     id: "sales-3",
     amount: 170000000,
     status: "aktif",
-    email: "sales-3@mitraku.com",
+    email: "sales-3@supplierplastik.com",
   },
   {
     id: "sales-4",
     amount: 95000000,
     status: "aktif",
-    email: "sales-4@mitraku.com",
+    email: "sales-4@supplierplastik.com",
   },
   {
     id: "sales-5",
     amount: 350000000,
     status: "aktif",
-    email: "sales-5@mitraku.com",
+    email: "sales-5@supplierplastik.com",
   },
 ];
 

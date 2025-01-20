@@ -60,7 +60,7 @@ function DesktopNav({
           <WalletCards color="#ffffff" />
         </div>
         <div className="flex flex-col">
-          <p className="leading-none font-bold text-foreground">PT MITRAKU</p>
+          <p className="leading-none font-bold text-foreground">PT MKS</p>
           <p className="leading-none text-foreground">Premium Plan</p>
         </div>
       </div>
