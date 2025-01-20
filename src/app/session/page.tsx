@@ -20,7 +20,7 @@ const SessionChecker = async () => {
   return (
     <div>
       <p>Welcome, {session.user?.name}!</p>
-      <p>Email: {session.user?.email}</p>
+      <p>Email: {session.user?.name}</p>
       <button onClick={() => (window.location.href = "/")}>Go to Home</button>
     </div>
   );
