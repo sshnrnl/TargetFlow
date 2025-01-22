@@ -1,6 +1,7 @@
 "use client";
+
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -35,7 +36,7 @@ import { NomorSO } from "@/components/sales-order-detail/nomor-so";
 import { IdSO } from "@/components/sales-order-detail/id-so";
 import { SalesOrderDetailItems } from "@/components/sales-order-detail/items";
 
-export default function Page() {
+function SalesOrderDetailsPage() {
   const searchParams = useSearchParams();
   const sales_order_id = searchParams?.get("so_id");
   type Item = [string, string | null, number, string, number];
@@ -51,6 +52,7 @@ export default function Page() {
 
   const [TempSO, setSO] = useState<SalesOrderData | undefined>(undefined);
   const [TempItems, setItems] = useState<Item[]>([]);
+
   const fetchSalesOrder = async () => {
     try {
       if (!sales_order_id) throw new Error("Sales order ID is undefined");
@@ -103,5 +105,13 @@ export default function Page() {
         </div>
       </div>
     </>
+  );
+}
+
+export default function Page() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <SalesOrderDetailsPage />
+    </Suspense>
   );
 }
