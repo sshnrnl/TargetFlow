@@ -64,6 +64,10 @@ const dashboardText = {
     title: "Buat Sales Order",
     description: "Klik tombol disini untuk membuat sales order.",
   },
+  "detail-sales-order": {
+    title: "Detail Sales Order",
+    description: "Review sales order mu disini.",
+  },
 };
 
 export default dashboardText;

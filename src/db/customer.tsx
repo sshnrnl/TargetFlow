@@ -298,8 +298,8 @@ export const fetchCustomer = async (): Promise<CustomerList[]> => {
 
     // Transform the raw data into the desired structure
     const customerList: CustomerList[] = rawData.map(([id, perusahaan]) => ({
-      perusahaan: perusahaan.trim(), // Trim to ensure clean data
-      value: id.trim(), // Remove extra whitespace
+      perusahaan: perusahaan, // Trim to ensure clean data
+      value: id, // Remove extra whitespace
     }));
 
     console.log("Transformed customer list:", customerList);

@@ -36,6 +36,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { useRouter } from "next/navigation";
 
 export const columns: ColumnDef<Invoices>[] = [
   {
@@ -88,7 +89,8 @@ export const columns: ColumnDef<Invoices>[] = [
     id: "actions",
     enableHiding: false,
     cell: ({ row }) => {
-      const customer = row.original;
+      const router = useRouter(); // Initialize the router
+      const invoice = row.original;
 
       return (
         <DropdownMenu>
@@ -101,12 +103,20 @@ export const columns: ColumnDef<Invoices>[] = [
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(customer.nama)}
+              onClick={() => navigator.clipboard.writeText(invoice.nama)}
             >
               Copy Nama
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>Lihat Details</DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() =>
+                router.push(
+                  `/sales/sales-order/details?so_id=${row.getValue("id")}`
+                )
+              }
+            >
+              Lihat Details
+            </DropdownMenuItem>
             <DropdownMenuItem>Edit Customer</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

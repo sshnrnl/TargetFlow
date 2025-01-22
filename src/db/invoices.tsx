@@ -16,7 +16,7 @@ export const fetchData = async (): Promise<Invoices[]> => {
     // Map the raw d  ata to the desired Invoices structure
     const invoices: Invoices[] = rawData.map(
       ([id, perusahaan, nominal, tanggal, , sales, nama]) => ({
-        id: id.trim(), // Remove extra whitespace
+        id: id, // Remove extra whitespace
         sales,
         perusahaan,
         nominal,

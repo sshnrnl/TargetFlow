@@ -6,6 +6,10 @@ type InputCounterProps = {
   onChange: (value: number) => void;
 };
 
+type ReadOnlyInputCounterProps = {
+  value: number;
+};
+
 export function InputCounter({ value, onChange }: InputCounterProps) {
   const increment = () => {
     onChange(value + 1);
@@ -56,6 +60,40 @@ export function InputCounter({ value, onChange }: InputCounterProps) {
           aria-label="Increase value"
           className="focus:outline-none"
         >
+          <Plus size={12} />
+        </button>
+      </div>
+    </div>
+  );
+}
+
+export function ReadOnlyInputCounter({ value }: ReadOnlyInputCounterProps) {
+  return (
+    <div className="flex items-center gap-[1px] bg-border rounded-md px-[1px]">
+      {/* Decrement Button */}
+      <div className="h-full bg-white px-2 rounded-s-md">
+        <button aria-label="Decrease value" className="focus:outline-none">
+          <Minus size={12} />
+        </button>
+      </div>
+
+      {/* Input Field */}
+      <input
+        type="number"
+        readOnly
+        value={value}
+        className="border border-gray-200 text-center bg-white"
+        style={{
+          width: `${Math.max(2, value.toString().length + 1)}ch`, // Dynamic width
+          minWidth: "3ch",
+        }}
+        min="1"
+        aria-label="Input value"
+      />
+
+      {/* Increment Button */}
+      <div className="h-full bg-white px-2 rounded-e-md">
+        <button aria-label="Increase value" className="focus:outline-none">
           <Plus size={12} />
         </button>
       </div>
