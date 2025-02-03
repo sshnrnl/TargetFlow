@@ -12,10 +12,19 @@ import {
 } from "@/components/ui/card";
 
 import dashboardText from "./text-dashboard-sales";
+import { useState, useEffect } from "react";
 
-const omzet = 13000000000;
+interface TotalOmzetSalesProps {
+  FetchedOmzet: number;
+}
 
-export function TotalOmzetSales() {
+export function TotalOmzetSales({ FetchedOmzet }: TotalOmzetSalesProps) {
+  const [omzet, setOmzet] = useState<number>(0);
+
+  useEffect(() => {
+    setOmzet(FetchedOmzet);
+  }, [FetchedOmzet]); // This will update omzet when FetchedOmzet changes
+
   return (
     <Card>
       <CardHeader>

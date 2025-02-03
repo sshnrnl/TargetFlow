@@ -12,10 +12,17 @@ import {
 } from "@/components/ui/card";
 
 import dashboardText from "./text-dashboard-sales";
+import { useEffect, useState } from "react";
 
-const invoice = 156;
+interface TotalInvoiceSalesProps {
+  FetchedInvoice: number;
+}
 
-export function InvoiceSales() {
+export function InvoiceSales({ FetchedInvoice }: TotalInvoiceSalesProps) {
+  const [invoice, setInvoice] = useState<number>(0);
+  useEffect(() => {
+    setInvoice(FetchedInvoice);
+  }, [FetchedInvoice]);
   return (
     <Card>
       <CardHeader>

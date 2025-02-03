@@ -12,10 +12,16 @@ import {
 } from "@/components/ui/card";
 
 import dashboardText from "./text-dashboard-sales";
+import { useEffect, useState } from "react";
 
-const customer = 76;
-
-export function PerformaSales() {
+interface TotalCustomerSalesProps {
+  FetchedCustomer: number;
+}
+export function PerformaSales({ FetchedCustomer }: TotalCustomerSalesProps) {
+  const [customer, setCustomer] = useState<number>(0);
+  useEffect(() => {
+    setCustomer(FetchedCustomer);
+  }, [FetchedCustomer]);
   return (
     <Card>
       <CardHeader>

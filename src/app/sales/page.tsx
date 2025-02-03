@@ -18,12 +18,7 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
-import { TotalCustomer } from "@/components/sales/total-customer";
-import { LoginForm } from "@/components/sales/buat-akun";
-import { LokasiMarketing } from "@/components/sales/lokasi-marketing";
-import { ConfigAkunMarketing } from "@/components/sales/config-akun-marketing";
-import { TargetMarketing } from "@/components/sales/target-marketing";
-import { KelolaTarget } from "@/components/sales/kelola-target";
+
 import { TotalOmzetSales } from "@/components/sales/total-omzet-sales";
 import { PerformaSales } from "@/components/sales/performa-sales";
 import { InvoiceSales } from "@/components/sales/invoice-sales";
@@ -31,7 +26,52 @@ import { RecentInvoice } from "@/components/sales/invoice-terbaru";
 import { RecentSoldItems } from "@/components/sales/barang-terjual";
 import { BuatSalesOrder } from "@/components/sales/buat-sales-order";
 import { SalesDashboardDriver } from "@/components/driverjs/sales-dashboard";
+
+import { fetchWithAuth } from "@/lib/get_api";
+import { useEffect, useState } from "react";
+
+export type MonthlySalesInfo = {
+  omzet: number;
+  jumlah_invoice: number;
+  jumlah_customer: number;
+};
+
+const fetchData = async (): Promise<MonthlySalesInfo> => {
+  try {
+    const rawData = await fetchWithAuth<MonthlySalesInfo>(
+      "/api/v1/sales/get_monthly_sales_details"
+    );
+
+    const salesInfo: MonthlySalesInfo = {
+      omzet: rawData.omzet,
+      jumlah_invoice: rawData.jumlah_invoice,
+      jumlah_customer: rawData.jumlah_customer,
+    };
+
+    console.log("Transformed data:", salesInfo);
+    return salesInfo;
+  } catch (error) {
+    console.error("Error fetching or transforming data:", error);
+    throw error;
+  }
+};
+
 export default function Page() {
+  const [monthlySalesInfo, setMonthlySalesInfo] = useState<MonthlySalesInfo>({
+    omzet: 0,
+    jumlah_invoice: 0,
+    jumlah_customer: 0,
+  });
+  useEffect(() => {
+    const fetchDataAsync = async () => {
+      const result = await fetchData();
+      setMonthlySalesInfo(result);
+    };
+    fetchDataAsync();
+  }, []);
+  useEffect(() => {
+    console.table(monthlySalesInfo);
+  }, [monthlySalesInfo]);
   return (
     <>
       <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
@@ -64,13 +104,13 @@ export default function Page() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 p-4 pt-0">
         <div className="grid col-span-3 grid-cols-1 lg:grid-cols-3 gap-4">
           <div id="omzet-sales">
-            <TotalOmzetSales />
+            <TotalOmzetSales FetchedOmzet={monthlySalesInfo.omzet} />
           </div>
           <div id="invoice-sales">
-            <InvoiceSales />
+            <InvoiceSales FetchedInvoice={monthlySalesInfo.jumlah_invoice} />
           </div>
           <div id="performa-sales">
-            <PerformaSales />
+            <PerformaSales FetchedCustomer={monthlySalesInfo.jumlah_customer} />
           </div>
         </div>
         <div className="grid col-span-3 grid-cols-1 lg:grid-cols-2 gap-4">

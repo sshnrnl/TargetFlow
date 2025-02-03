@@ -1,0 +1,1 @@
+npx cap build android --keystorepath my-release-key.jks --keystorepass pendalaman --keystorealias TargetFlowKey --keystorealiaspass pendalaman --androidreleasetype APK
