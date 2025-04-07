@@ -1,3 +1,6 @@
+import { de } from "date-fns/locale";
+import { title } from "process";
+
 const dashboardText = {
   "kelola-target": {
     title: "Kelola Kampanye Penjualan",
@@ -67,6 +70,28 @@ const dashboardText = {
   "detail-sales-order": {
     title: "Detail Sales Order",
     description: "Review sales order mu disini.",
+  },
+  "total-barang-saya": {
+    title: "Total Barang Saya",
+    description: "Disini anda dapat melihat total barang yang anda miliki.",
+  },
+
+  "stock-menipis": {
+    title: "Stock Menipis",
+    description: "Disini anda dapat melihat barang dengan stock dikit.",
+  },
+  "stock-habis": {
+    title: "Stock Habis",
+    description: "Disini anda dapat melihat barang yang sudah habis.",
+  },
+  "stock-barang": {
+    title: "Stock Barang",
+    description: "Disini anda dapat melihat semua stock barang.",
+  },
+  "barang-dipantau": {
+    title: "Barang Dipantau",
+    description:
+      "Disini anda dapat melihat barang yang anda pantau dan statusnya.",
   },
 };
 

@@ -26,6 +26,26 @@ const dashboardText = {
     title: "Payment Summary",
     description: "Lihat rangkuman pembayaran disini",
   },
+  "buat-target": {
+    title: "Buat Target",
+    description: "Buat target penjualan untuk sales anda.",
+  },
+  "target-detail": {
+    title: "Detail Target",
+    description: "Detail target penjualan anda.",
+  },
+  "target-list": {
+    title: "List Barang",
+    description: "Lihat detail produk anda disini.",
+  },
+  "target-item": {
+    title: "Item Target",
+    description: "Detail item target penjualan anda.",
+  },
+  "sales-selector": {
+    title: "Pilih Sales",
+    description: "Pilih sales yang akan menerima target ini.",
+  },
 };
 
 export default dashboardText;

@@ -198,7 +198,7 @@ export const CustomerTableData: Customer[] = [
   },
   {
     perusahaan: "UD Nusantara",
-    nama: "Rahmat Hidayat", 
+    nama: "Rahmat Hidayat",
     whatsapp: "081322334455",
     provinsi: "Riau",
     kota: "Pekanbaru",
@@ -288,6 +288,14 @@ export type CustomerDetails = {
   perusahaan: string;
   alamat_lengkap: string;
   whatsapp: string;
+};
+
+export type TargetDetails = {
+  targetName: string;
+  targetDesc: string;
+  prize: string;
+  startDate: Date;
+  endDate: Date;
 };
 
 export const fetchCustomer = async (): Promise<CustomerList[]> => {

@@ -15,6 +15,7 @@ import {
   SquareTerminal,
   SquareUser,
   Target,
+  Boxes,
 } from "lucide-react";
 
 export const ConfigData = {
@@ -172,6 +173,12 @@ const ConfigSidebarData: ConfigSidebarDataType = {
         // url: "/sales/sales-order",
         url: "/sales/sales-order",
         icon: ScrollText,
+      },
+      {
+        name: "Lihat Stock",
+        // url: "/sales/sales-order",
+        url: "/sales/stock-barang",
+        icon: Boxes,
       },
     ],
   },
