@@ -14,6 +14,7 @@ import { Button } from "../ui/button";
 import { useEffect, useState } from "react";
 import { postWithAuth } from "@/lib/post_api";
 import { useRouter } from "next/navigation";
+import { items } from "@/db/items";
 
 export function PaymentSummary() {
   const router = useRouter();
@@ -52,7 +53,7 @@ export function PaymentSummary() {
     };
     const handleAddSubtotal = (event: Event) => {
       const customEvent = event as CustomEvent<number>;
-      setSubtotal(customEvent.detail);
+      setSubtotal(customEvent.detail / 1.11);
     };
     const handleAddCustomer = (event: Event) => {
       const customEvent = event as CustomEvent<string>;

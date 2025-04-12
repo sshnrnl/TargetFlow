@@ -77,15 +77,17 @@ export function TargetDetail() {
       path: ["endDate"],
     });
 
+  const today = new Date().toISOString().split("T")[0]; // format: YYYY-MM-DD
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    mode: "onChange", // ✅ validate on input change
+    mode: "onChange",
     defaultValues: {
       nama: "",
       hadiah: "",
       deskripsi: "",
-      startDate: "",
-      endDate: "",
+      startDate: today,
+      endDate: today,
     },
   });
 

@@ -9,6 +9,8 @@ type CartType = {
   price: number;
   img: string;
   total: number;
+  conversion: number;
+  minprice: number;
   description: string;
 };
 
@@ -30,8 +32,12 @@ export function ProductTable() {
     window.dispatchEvent(event);
 
     const subtotal = new CustomEvent("update-subtotal", {
-      detail: cart.reduce((total, item) => total + item.price * item.qty, 0),
+      detail: cart.reduce((total, item) => {
+        const unitPrice = item.qty >= 10 ? item.minprice : item.price;
+        return total + unitPrice * item.qty * item.conversion;
+      }, 0),
     });
+
     window.dispatchEvent(subtotal);
   }, [cart]);
   //////////////////
@@ -80,6 +86,8 @@ export function ProductTable() {
           price: product.price,
           qty: 1,
           total: product.price,
+          conversion: product.conversion,
+          minprice: product.minprice,
           img: product.img,
           description: product.description,
         },
@@ -93,9 +101,18 @@ export function ProductTable() {
 
   const updateQuantity = (productId: string, qty: number) => {
     setCart((prevCart) =>
-      prevCart.map((item) =>
-        item.id === productId ? { ...item, qty, total: qty * item.price } : item
-      )
+      prevCart.map((item) => {
+        if (item.id !== productId) return item;
+
+        const useMinPrice = qty >= 10;
+        const newPrice = useMinPrice ? item.minprice : item.price;
+
+        return {
+          ...item,
+          qty,
+          total: qty * newPrice,
+        };
+      })
     );
   };
 
@@ -143,14 +160,33 @@ export function ProductTable() {
                   </div>
 
                   <div className="flex justify-between items-end">
-                    <div className="flex flex-col">
-                      <label className="text-sm font-bold text-muted-foreground leading-none">
-                        {new Intl.NumberFormat("id-ID", {
-                          style: "currency",
-                          currency: "IDR",
-                          minimumFractionDigits: 0,
-                        }).format(item.price)}
-                      </label>
+                    <div className="flex gap-2">
+                      {item.qty >= 10 && item.minprice !== item.price ? (
+                        <>
+                          <label className="text-sm font-bold text-muted-foreground leading-none line-through opacity-50">
+                            {new Intl.NumberFormat("id-ID", {
+                              style: "currency",
+                              currency: "IDR",
+                              minimumFractionDigits: 0,
+                            }).format(item.price)}
+                          </label>
+                          <label className="text-sm font-bold text-destructive leading-none">
+                            {new Intl.NumberFormat("id-ID", {
+                              style: "currency",
+                              currency: "IDR",
+                              minimumFractionDigits: 0,
+                            }).format(item.minprice)}
+                          </label>
+                        </>
+                      ) : (
+                        <label className="text-sm font-bold text-muted-foreground leading-none">
+                          {new Intl.NumberFormat("id-ID", {
+                            style: "currency",
+                            currency: "IDR",
+                            minimumFractionDigits: 0,
+                          }).format(item.price)}
+                        </label>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -162,7 +198,7 @@ export function ProductTable() {
                     style: "currency",
                     currency: "IDR",
                     minimumFractionDigits: 0,
-                  }).format(item.total)}
+                  }).format(item.total * item.conversion)}
                 </label>
                 <InputCounter
                   value={item.qty}

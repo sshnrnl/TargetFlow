@@ -46,6 +46,10 @@ const dashboardText = {
     title: "Pilih Sales",
     description: "Pilih sales yang akan menerima target ini.",
   },
+  "target-summary": {
+    title: "Target Summary",
+    description: "Lihat rangkuman target penjualan disini.",
+  },
 };
 
 export default dashboardText;

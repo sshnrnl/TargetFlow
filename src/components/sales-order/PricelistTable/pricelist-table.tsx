@@ -42,6 +42,8 @@ type CartType = {
   name: string;
   qty: number;
   price: number;
+  minprice: number;
+  conversion: number;
   img: string;
   total: number;
   description: string;
@@ -50,6 +52,8 @@ function handleAddToCart(
   id: string,
   price: number,
   description: string,
+  conversion: number,
+  minprice: number,
   img: string,
   name: string
 ) {
@@ -59,6 +63,8 @@ function handleAddToCart(
     qty: 1,
     price: price,
     img: img,
+    minprice: minprice,
+    conversion: conversion,
     total: price,
     description: description,
   };
@@ -139,6 +145,8 @@ export const columns: ColumnDef<FetchItemsType>[] = [
             row.getValue("value"),
             row.getValue("price"),
             row.getValue("description"),
+            row.getValue("conversion"),
+            row.getValue("minprice"),
             "https://st2.depositphotos.com/1003272/5280/i/450/depositphotos_52809811-stock-photo-black-box.jpg",
             row.getValue("name")
           )
@@ -148,6 +156,17 @@ export const columns: ColumnDef<FetchItemsType>[] = [
         Tambahkan
       </Button>
     ),
+  },
+
+  {
+    accessorKey: "conversion",
+    header: "Barang",
+    cell: ({ row }) => <label></label>,
+  },
+  {
+    accessorKey: "minprice",
+    header: "Barang",
+    cell: ({ row }) => <label></label>,
   },
 ];
 
@@ -216,53 +235,9 @@ export function PricelistTable() {
         <Button className="flex-1" variant="outline">
           Reload
         </Button>
-        {/* <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="ml-auto">
-              Columns <ChevronDown />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            {table
-              .getAllColumns()
-              .filter((column) => column.getCanHide())
-              .map((column) => {
-                return (
-                  <DropdownMenuCheckboxItem
-                    key={column.id}
-                    className="capitalize"
-                    checked={column.getIsVisible()}
-                    onCheckedChange={(value) =>
-                      column.toggleVisibility(!!value)
-                    }
-                  >
-                    {column.id}
-                  </DropdownMenuCheckboxItem>
-                );
-              })}
-          </DropdownMenuContent>
-        </DropdownMenu> */}
       </div>
       <div className="rounded-md border bg-border">
         <div>
-          {/* <TableHeader>
-            {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id}>
-                {headerGroup.headers.map((header) => {
-                  return (
-                    <TableHead key={header.id}>
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
-                    </TableHead>
-                  );
-                })}
-              </TableRow>
-            ))}
-          </TableHeader> */}
           <div className="flex flex-col gap-[1px]">
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
@@ -271,14 +246,6 @@ export function PricelistTable() {
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
                 >
-                  {/* {row.getVisibleCells().map((cell) => (
-                    <div key={cell.id}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
-                    </div>
-                  ))}   */}
                   <div className="flex w-full">
                     <div key={row.getVisibleCells()[0].id}>
                       {flexRender(
@@ -320,21 +287,13 @@ export function PricelistTable() {
                 </div>
               ))
             ) : (
-              // <TableRow>
-              //   <TableCell
-              //     colSpan={columns.length}
-              //     className="h-24 text-center"
-              //   >
               <div>No results.</div>
-              /* </TableCell>
-              </TableRow> */
             )}
           </div>
         </div>
       </div>
       <div className="flex items-center justify-end space-x-2 py-4">
         <div className="flex-1 text-sm text-muted-foreground">
-          {/* {table.getFilteredSelectedRowModel().rows.length} of{" "} */}
           Showing {table.getFilteredRowModel().rows.length} item(s).
         </div>
         <div className="space-x-2">

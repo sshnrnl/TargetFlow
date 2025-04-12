@@ -64,7 +64,7 @@ export default function BuatTarget() {
           <SalesSelector />
         </div>
         <div className="col-span-1 flex flex-col gap-4">
-          {/* <TargetSummary /> */}
+          <TargetSummary />
         </div>
       </div>
     </>

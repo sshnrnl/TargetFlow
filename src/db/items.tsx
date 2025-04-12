@@ -198,6 +198,8 @@ export type FetchItemsType = {
   name: string;
   price: number;
   description: string;
+  conversion: number;
+  minprice: number;
 };
 
 export const fetchItems = async (): Promise<FetchItemsType[]> => {
@@ -208,11 +210,14 @@ export const fetchItems = async (): Promise<FetchItemsType[]> => {
 
     // Transform the raw data into the desired structure
     const itemsList: FetchItemsType[] = rawData.map(
-      ([value, name, price, description]) => ({
+      ([value, name, price, description, conversion, minprice]) => ({
         value, // Trim to ensure clean data
         name,
         price,
         description: "SATUAN : " + description,
+        conversion,
+        minprice,
+
         imgs: "https://st2.depositphotos.com/1003272/5280/i/450/depositphotos_52809811-stock-photo-black-box.jpg", // Remove extra whitespace
       })
     );

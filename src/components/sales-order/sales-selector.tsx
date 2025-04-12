@@ -66,8 +66,27 @@ export function SalesSelector() {
   }, []);
 
   useEffect(() => {
-    console.log("Selected sales:", watchedSales);
-  }, [watchedSales]);
+    const event = new CustomEvent("add-sales", {
+      detail: watchedSales,
+    });
+    window.dispatchEvent(event);
+
+    const selectedSalesNames = salesList
+      .filter((sales) => watchedSales.includes(sales.id))
+      .map((sales) =>
+        sales.username
+          .split(" ")
+          .map(
+            (word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+          )
+          .join(" ")
+      );
+
+    const events = new CustomEvent("sales-list", {
+      detail: selectedSalesNames,
+    });
+    window.dispatchEvent(events);
+  }, [watchedSales, salesList]);
 
   return (
     <Card>

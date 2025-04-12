@@ -7,6 +7,8 @@ type CartType = {
   name: string;
   qty: number;
   price: number;
+  minprice: number;
+  conversion: number;
   img: string;
   total: number;
   description: string;
@@ -44,6 +46,7 @@ export function TargetTable() {
   useEffect(() => {
     const handleAddToCart = (event: Event) => {
       const customEvent = event as CustomEvent<CartType>;
+      
       addToCartById(customEvent.detail);
       // console.log(customEvent.detail);
     };
@@ -78,6 +81,8 @@ export function TargetTable() {
           id: product.id,
           name: product.name,
           price: product.price,
+          minprice: product.minprice,
+          conversion: product.conversion,
           qty: 1,
           total: product.price,
           img: product.img,
@@ -94,7 +99,7 @@ export function TargetTable() {
   const updateQuantity = (productId: string, qty: number) => {
     setCart((prevCart) =>
       prevCart.map((item) =>
-        item.id === productId ? { ...item, qty, total: qty * item.price } : item
+        item.id === productId ? { ...item, qty, total: qty * item.price  } : item
       )
     );
   };
