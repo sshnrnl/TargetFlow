@@ -142,12 +142,19 @@ export function TargetProgress() {
                                 key={item.items_id}
                                 className="flex gap-2 justify-between text-sm text-zinc-800"
                               >
-                                <span>Nama: {item.item_name}</span>
-                                <span className="whitespace-nowrap">
-                                  {soldItem
-                                    ? `${soldItem.qty_sold} / ${item.qty}`
-                                    : `0 / ${item.qty}`}
-                                </span>
+                                <div
+                                  key={item.items_id}
+                                  className="flex gap-2 w-full justify-between text-sm text-zinc-800"
+                                >
+                                  <span className="truncate max-w-[16rem]">
+                                    {item.item_name}
+                                  </span>
+                                  <span className="whitespace-nowrap">
+                                    {soldItem
+                                      ? `${soldItem.qty_sold} / ${item.qty}`
+                                      : `0 / ${item.qty}`}
+                                  </span>
+                                </div>
                               </div>
                             );
                           })}
