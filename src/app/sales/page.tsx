@@ -29,6 +29,7 @@ import { SalesDashboardDriver } from "@/components/driverjs/sales-dashboard";
 
 import { fetchWithAuth } from "@/lib/get_api";
 import { useEffect, useState } from "react";
+import { TargetProgress } from "@/components/sales/get-target-progress";
 
 export type MonthlySalesInfo = {
   omzet: number;
@@ -119,7 +120,7 @@ export default function Page() {
           </div>
           <div className="flex flex-col gap-4">
             <div id="recent-sold">
-              <RecentSoldItems />
+              <TargetProgress />
             </div>
             <div id="buat-so">
               <BuatSalesOrder />

@@ -93,6 +93,10 @@ const dashboardText = {
     description:
       "Disini anda dapat melihat barang yang anda pantau dan statusnya.",
   },
+  "target-progress": {
+    title: "Target Progress",
+    description: "Disini anda dapat melihat progress target penjualan anda.",
+  },
 };
 
 export default dashboardText;

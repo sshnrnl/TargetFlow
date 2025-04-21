@@ -28,7 +28,7 @@ export function BuatSalesOrder() {
         <CardContent>
           <div className="flex flex-col gap-6">
             <Button
-              // onClick={() => router.push("/sales/sales-order")}
+              onClick={() => router.push("/sales/sales-order")}
               className="w-full"
             >
               Buat Sales Order

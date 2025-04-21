@@ -308,7 +308,7 @@ export function TargetSummary() {
                     .toISOString()
                     .split("T")[0],
                   "assigned-to": submitFormData.assigned_to.map((id) =>
-                    Number(id)
+                    String(id)
                   ),
                   "target-items": submitFormData.items,
                 };
