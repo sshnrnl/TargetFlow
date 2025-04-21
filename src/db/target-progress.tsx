@@ -8,6 +8,7 @@ export interface SoldItem {
 
 export interface TargetDetail {
   items_id: string;
+  item_name: string;
   qty: number;
 }
 
@@ -32,6 +33,7 @@ interface RawSoldItem {
 
 interface RawTargetDetail {
   items_id: string;
+  item_name: string;
   qty: string;
 }
 
@@ -57,7 +59,6 @@ export const fetchData = async (): Promise<{ targets: TargetFormat[] }> => {
       "/api/v1/sales/get_target"
     );
 
-    // Checking if rawData is correctly structured
     if (!rawData || !rawData.targets) {
       throw new Error("Invalid data structure");
     }
@@ -65,6 +66,17 @@ export const fetchData = async (): Promise<{ targets: TargetFormat[] }> => {
     const transformedData = rawData.targets.map((target) => {
       const soldMap = new Map<string, number>(
         target.sold.map((soldItem) => [soldItem.items_id, soldItem.qty_sold])
+      );
+
+      const soldNameMap = new Map<string, string>(
+        target.sold.map((item) => [item.items_id, item.item_name])
+      );
+
+      const detailNameMap = new Map<string, string>(
+        target.details.map((detail) => [
+          detail.items_id,
+          soldNameMap.get(detail.items_id) || "Unknown",
+        ])
       );
 
       let totalQty = 0;
@@ -78,12 +90,23 @@ export const fetchData = async (): Promise<{ targets: TargetFormat[] }> => {
           totalQty += qty;
           totalSold += soldQty;
 
+          // Determine the item name from soldNameMap (or fallback to "Unknown")
+          const item_name = detail.item_name;
+
           return {
             items_id: detail.items_id,
             qty,
+            item_name, // Ensure item_name is correctly populated
           };
         }
       );
+
+      const soldItems: SoldItem[] = target.sold.map((sold) => ({
+        items_id: sold.items_id,
+        qty_sold: Number(sold.qty_sold) || 0,
+        item_name:
+          sold.item_name || detailNameMap.get(sold.items_id) || "Unknown", // Fallback
+      }));
 
       const overallProgress = totalQty > 0 ? totalSold / totalQty : 0;
 
@@ -96,16 +119,12 @@ export const fetchData = async (): Promise<{ targets: TargetFormat[] }> => {
         start_date: target.start_date,
         end_date: target.end_date,
         details: detailsWithProgress,
-        sold: target.sold.map((sold) => ({
-          item_name: sold.item_name,
-          items_id: sold.items_id,
-          qty_sold: Number(sold.qty_sold) || 0,
-        })),
+        sold: soldItems,
         progress: overallProgress,
       };
     });
 
-    console.log("Transformed Data:", transformedData); // Debugging line to check the transformed data
+    console.log("Transformed Data:", transformedData);
     return { targets: transformedData };
   } catch (error) {
     console.error("Error fetching or transforming data:", error);
