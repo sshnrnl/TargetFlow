@@ -140,10 +140,10 @@ export function TargetProgress() {
                             return (
                               <div
                                 key={item.items_id}
-                                className="flex justify-between text-sm text-zinc-800"
+                                className="flex gap-2 justify-between text-sm text-zinc-800"
                               >
                                 <span>Nama: {item.item_name}</span>
-                                <span>
+                                <span className="whitespace-nowrap">
                                   {soldItem
                                     ? `${soldItem.qty_sold} / ${item.qty}`
                                     : `0 / ${item.qty}`}
